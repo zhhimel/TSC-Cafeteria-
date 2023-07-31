@@ -6,12 +6,11 @@ require("./config/db");
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-
 app.use("/",routes);
 app.use((req,res,next)=>{
     console.log("Route not found")
 })
 app.use((err,req,res,next)=>{
-    console.log("Server crushed");
+    console.log(err);
 })
 module.exports=app;

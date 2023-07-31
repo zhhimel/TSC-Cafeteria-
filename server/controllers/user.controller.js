@@ -1,5 +1,6 @@
 const user = require("../models/user.model");
 const foods = require("../models/foods.model");
+const multer = require('multer');
 const signinUser = async (req, res) => {
     const { email, password } = req.body;
     const data = {
@@ -53,13 +54,29 @@ const getAllusers=async(req,res)=>{
 
     }
 }
+const deleteUser=async(req,res)=>{
+    const id = req.query.id;
+    try {
+        const deletedUser = await user.deleteOne({_id:id});
+        if (deletedUser) {
+            res.json(deletedUser);
+        }
+        else {
+            res.json("Error");
+        }
+    }
+    catch (err) {
+        res.json(err);
+    }
+}
 const addFoods = async (req, res) => {
-    const { id1, name1, price1, image1, description1, tag1 } = req.body;
+    const { id1, name1, price1, description1, tag1 } = req.body;
+    const imagePath = req.file.filename;
     const data = {
         id: id1,
         name: name1,
         price: price1,
-        image: image1,
+        image1: imagePath,
         description: description1,
         tag: tag1
     }
@@ -126,4 +143,13 @@ const getFoods = async (req, res) => {
     }
 
 }
-module.exports = { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods,getAllusers }
+const showAllfoods=async(req,res)=>{
+    try{
+        const food=await foods.find();
+        res.json(food);
+    }
+    catch{
+        res.json("error");
+    }
+}
+module.exports = { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods,getAllusers,deleteUser,showAllfoods }

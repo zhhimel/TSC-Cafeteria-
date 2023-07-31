@@ -15,7 +15,7 @@ const newSchema=new mongoose.Schema({
         require: true,
         
     },
-    image:{
+    image1:{
         type: String,
         require: true,
         
