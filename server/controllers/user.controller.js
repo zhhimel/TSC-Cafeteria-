@@ -97,7 +97,16 @@ const addFoods = async (req, res) => {
 }
 const updateFoods = async (req, res) => {
     const id = req.query.id;
-    const updatefood = req.body;
+    const { id1, name1, price1, description1, tag1 } = req.body;
+    const imagePath = req.file.filename;
+    const updatefood = {
+        id: id1,
+        name: name1,
+        price: price1,
+        image1: imagePath,
+        description: description1,
+        tag: tag1
+    }
     try {
         const updatedFood = await foods.findOneAndUpdate({ id: id }, updatefood, { new: true });
         if (updatedFood) {

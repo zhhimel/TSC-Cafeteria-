@@ -21,7 +21,7 @@ routes.delete("/users", deleteUser);
 routes.get("/foods", showAllfoods) 
 
 routes.get("/controlFoods", getFoods);
-routes.put("/controlFoods", updateFoods);
+routes.put("/controlFoods", upload.single('image1'), updateFoods);
 routes.post("/controlFoods", upload.single('image1'), addFoods);
 routes.delete("/controlFoods", deleteFoods);
-module.exports = routes;     
+module.exports = routes;      
