@@ -22,4 +22,4 @@ const newSchema=new mongoose.Schema({
     }
 })
 const orderdetails=mongoose.model("orderdetails",newSchema);
-module.exports=user;
+module.exports=orderdetails;

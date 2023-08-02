@@ -1,5 +1,6 @@
 const user = require("../models/user.model");
 const foods = require("../models/foods.model");
+const orderdetails = require("../models/order-details")
 const multer = require('multer');
 const signinUser = async (req, res) => {
     const { email, password } = req.body;
@@ -40,24 +41,24 @@ const signupUser = async (req, res) => {
         res.json("fail");
     }
 }
-const getAllusers=async(req,res)=>{
-    try{
-        const users=await user.find();
-        if(users){
+const getAllusers = async (req, res) => {
+    try {
+        const users = await user.find();
+        if (users) {
             res.json(users);
         }
-        else{
+        else {
             res.json("No users");
         }
     }
-    catch(err){
+    catch (err) {
 
     }
 }
-const deleteUser=async(req,res)=>{
+const deleteUser = async (req, res) => {
     const id = req.query.id;
     try {
-        const deletedUser = await user.deleteOne({_id:id});
+        const deletedUser = await user.deleteOne({ _id: id });
         if (deletedUser) {
             res.json(deletedUser);
         }
@@ -120,7 +121,7 @@ const updateFoods = async (req, res) => {
         res.json(err);
     }
 }
-const deleteFoods = async(req,res) => {
+const deleteFoods = async (req, res) => {
     const id = req.query.id;
     try {
         const deletedFood = await foods.findOneAndDelete(id);
@@ -152,13 +153,30 @@ const getFoods = async (req, res) => {
     }
 
 }
-const showAllfoods=async(req,res)=>{
-    try{
-        const food=await foods.find();
+const showAllfoods = async (req, res) => {
+    try {
+        const food = await foods.find();
         res.json(food);
     }
-    catch{
+    catch {
         res.json("error");
     }
 }
-module.exports = { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods,getAllusers,deleteUser,showAllfoods }
+const postOrderdetails = async (req, res) => {
+    const { userEmail, phone, totalprice, address} = req.body;
+    const data = {
+        email: userEmail,
+        phone: phone,
+        amount: totalprice,
+        address: address,
+        date: Date.now(),
+    }
+    try {
+        await orderdetails.insertMany([data]);
+        res.json(req.body)
+    }
+    catch (err) {
+        res.json("err");
+    }
+}
+module.exports = { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods, getAllusers, deleteUser, showAllfoods,postOrderdetails }
