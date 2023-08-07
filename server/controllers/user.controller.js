@@ -179,4 +179,13 @@ const postOrderdetails = async (req, res) => {
         res.json("err");
     }
 }
-module.exports = { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods, getAllusers, deleteUser, showAllfoods,postOrderdetails }
+const showAllorders=async(req,res)=>{
+    try {
+        const order = await orderdetails.find();
+        res.json(order);
+    }
+    catch {
+        res.json("error");
+    }
+}
+module.exports = { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods, getAllusers, deleteUser, showAllfoods,postOrderdetails, showAllorders }
