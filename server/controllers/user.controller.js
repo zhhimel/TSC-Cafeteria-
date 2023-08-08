@@ -188,4 +188,7 @@ const showAllorders=async(req,res)=>{
         res.json("error");
     }
 }
-module.exports = { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods, getAllusers, deleteUser, showAllfoods,postOrderdetails, showAllorders }
+const sendpassword=async(req,res)=>{
+    
+}
+module.exports = { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods, getAllusers, deleteUser, showAllfoods,postOrderdetails, showAllorders,sendpassword }

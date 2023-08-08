@@ -1,5 +1,5 @@
 const express = require("express");
-const { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods, getAllusers, deleteUser, showAllfoods, postOrderdetails, showAllorders } = require("../controllers/user.controller");
+const { signinUser, signupUser, addFoods, deleteFoods, getFoods, updateFoods, getAllusers, deleteUser, showAllfoods, postOrderdetails, showAllorders, sendpassword } = require("../controllers/user.controller");
 const routes = express.Router();
 const multer = require('multer');
 
@@ -27,4 +27,6 @@ routes.get("/controlFoods", getFoods);
 routes.put("/controlFoods", upload.single('image1'), updateFoods);
 routes.post("/controlFoods", upload.single('image1'), addFoods);
 routes.delete("/controlFoods", deleteFoods);
+
+routes.post("/sendpasswordlink", sendpassword);
 module.exports = routes;      
